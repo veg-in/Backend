@@ -9,8 +9,10 @@ const client = new Client({
   database: process.env.PG_DATABASE || "your_database",
   password: process.env.PG_PASSWORD || "your_password",
   port: Number(process.env.PG_PORT) || 5432,
+  ssl: {
+    rejectUnauthorized: false, // Render의 SSL 인증서가 필요 없음
+  },
 });
-
 const checkTableExists = async (): Promise<boolean> => {
   const query = `
     SELECT EXISTS (
